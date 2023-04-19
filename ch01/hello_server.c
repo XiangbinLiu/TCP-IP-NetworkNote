@@ -56,3 +56,32 @@ void error_handling(char *message)
     fputc('\n', stderr);
     exit(1);
 }
+
+//这是我读的第一篇代码，所以注释很多。
+/**总的流程：创建IP地址，打开server文件。服务器文件绑定IP。开始监听
+ * （listen and accept，在accept步阻塞）。在accpet打开了clinet文件。
+ * 消息写入client文件。大功告成。（万物皆文件。）
+ * （1）：关于socket函数：
+ * domain:地址族（ipv4，ipv6，local）
+ * type：面向连接或者不面向连接
+ * protocal：填0，默认和type一致
+ * 
+ * （2）：关于socketaddr_in结构体：
+ * struct sockaddr_in
+  {
+    __SOCKADDR_COMMON (sin_);   //地址族
+    in_port_t sin_port;			//16位端口
+    struct in_addr sin_addr;	//32位IP地址
+    unsigned char sin_zero[sizeof (struct sockaddr)   //不用的区段
+			   - __SOCKADDR_COMMON_SIZE
+			   - sizeof (in_port_t)
+			   - sizeof (struct in_addr)];
+  };
+  （3）：用于转化大小端的函数：（网络传输用大端，CPU用小端）
+  hstonl：host to net long
+  hstons：host to net short
+  （4）：关于listen函数函数 listen(int sockfd, int backlog)：
+        监听的对象，队列长度的log值
+    
+ * 
+*/
